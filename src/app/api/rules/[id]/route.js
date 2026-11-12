@@ -1,0 +1,46 @@
+import { NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
+
+export async function PUT(request, { params }) {
+  try {
+    const { id } = await params;
+    const { probability } = await request.json();
+
+    await prisma.diagnosis.deleteMany();
+    await prisma.consultationSymptom.deleteMany();
+    await prisma.consultation.deleteMany();
+
+    const rule = await prisma.rule.update({
+      where: { id: id },
+      data: { probability: parseFloat(probability) },
+      include: {
+        disease: true,
+        symptom: true,
+      },
+    });
+
+    return NextResponse.json(rule);
+  } catch (error) {
+    console.error("Update rule error:", error);
+    return NextResponse.json({ error: "Gagal mengupdate aturan" }, { status: 500 });
+  }
+}
+
+export async function DELETE(request, { params }) {
+  try {
+    const { id } = await params;
+
+    await prisma.diagnosis.deleteMany();
+    await prisma.consultationSymptom.deleteMany();
+    await prisma.consultation.deleteMany();
+
+    await prisma.rule.delete({
+      where: { id: id },
+    });
+
+    return NextResponse.json({ message: "Aturan berhasil dihapus" });
+  } catch (error) {
+    console.error("Delete rule error:", error);
+    return NextResponse.json({ error: "Gagal menghapus aturan" }, { status: 500 });
+  }
+}
