@@ -13,7 +13,6 @@ Aplikasi Sistem Pakar (*Expert System*) berbasis web modern untuk skrining dan d
   - **Kelola Penyakit**: CRUD data penyakit mental (Depresi Mayor, GAD, Gangguan Panik, dll).
   - **Kelola Gejala**: CRUD data indikator gejala klinis.
   - **Basis Pengetahuan**: Visualisasi matriks probabilitas Bayes dan kaidah inferensi Forward Chaining (*IF ... THEN*).
-- **🎨 Tampilan Modern**: Antarmuka *Dark Premium Theme* dengan efek Glassmorphism.
 
 ---
 
